@@ -101,3 +101,9 @@ git merge second
 git merge first
 
 31*. Resolve conflict and push the changes to remote
+# Відкриваю проект у програмі PyCharm 
+# Нажимаю комбінацію клавіш "Double Shift" (Search Everywhere)
+# У віконечку прописую слово "merge" 
+# У новому вікні прописую "first" і нажимаю "merge"
+# У новому відкі знову нажимаю на кнопку "merge" і самостійно вирішую конфлікт
+git push
