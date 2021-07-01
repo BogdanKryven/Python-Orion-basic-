@@ -15,7 +15,7 @@ st = {'1', '2', '3'}
 # object which is an array of given bytes.
 # It gives a mutable sequence of
 # integers in the range 0 <= x < 256.
-#bytearray(source, encoding, errors)
+# bytearray(source, encoding, errors)
 # simple list of integers
 list = [1, 2, 3, 4]
 # iterable as source
