@@ -1,0 +1,121 @@
+1. Create `cursor` directory and `test.txt` file
+
+mkdir Cursor
+touch test.txt
+
+
+
+2. Copy `test.txt` file to `cursor` directory
+
+cp test.txt Cursor/
+
+
+
+3. List the files in the current directory, in “long listing format”.
+
+cd Cursor/
+ll
+
+
+
+4. List all files, including hidden files, in the your home (~) directory, in reverse alphabetical order and long listing format.
+
+cd
+ls -rla
+
+
+
+5. Rename the file `test.txt` to `new_test.txt` and then create one more `empty_file.txt`
+cd Cursor/
+
+mv test.txt new_text.txt
+touch empty_file.txt
+
+
+
+6. Delete the files empty_file.txt and new_test.txt. 
+Create hw.txt file under cursor directory
+
+rm new_test.txt | rm empty_file.txt
+touch hw.txt
+
+
+
+7. Set the file hw.txt to have a last-modified date of January 1, 2020, 4:15am.
+Create hw.sh, hw1.sh, hw2.sh, hw1.txt under the cursor directory
+
+touch -cmt 2001010415 hw.txt
+touch hw{,1,2}.sh | touch hw1.txt
+
+
+
+8. List all files (only with the extension .sh) in the current directory.
+
+ls | grep .sh
+
+
+
+9. Copy all the text files (files whose names end with .txt) from the current folder to the new directory `text_files`.
+
+mkdir text_files | cp *.txt text_files/
+
+
+
+10. Write `cursor` to the hw.txt file by using echo.
+
+cd text_files/
+echo "cursor" > hw.txt
+
+
+
+11. Display the contents of hw.txt
+
+cat hw.txt 
+
+
+
+12. Change the permissions to 0 for current user and try to Display contents again.
+
+sudo chmod 064 hw.txt
+cat hw.txt
+
+
+
+13. Change the permission to rwx for current user only and try again.
+
+sudo chmod u+rwx hw.txt
+cat hw.txt
+
+
+
+14. Write from 1 to 10 in each line in hw.txt by using text reader.
+
+nano hw.txt
+f3 (press)
+
+
+
+15. Display only the first 7 lines of the file hw.txt from the current directory on the terminal.
+
+head -n 7 hw.txt
+
+
+
+16. Create test.sh with echo 'Hello' and make it executable
+
+touch test.sh | echo "echo 'Hello'" > test.sh
+sudo chmod a+rwx test.sh
+
+
+
+17. Execute test.sh
+
+./test.sh 
+
+
+
+18. Search for a files with .sh in your working directory.
+
+cd ..
+find *.sh
+
