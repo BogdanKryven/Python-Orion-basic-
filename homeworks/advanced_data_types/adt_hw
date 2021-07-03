@@ -15,6 +15,10 @@ Replace the placeholders with a value:
 5. With .format and curly braces {}
 6. By passing index numbers into the curly braces.
 7. By using keyword arguments into the curly braces.
+
+
+
+
 8*. With indicators of field size (5 chars for the first and 3 for the second)
 9. With f-strings and variables
 10. With % operator

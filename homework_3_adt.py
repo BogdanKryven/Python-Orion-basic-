@@ -13,7 +13,9 @@ print("Define the id of dict_e =", id(dict_e))
 
 # 2. Append 4 and 5 to the lst_d and define the id one more time.
 print("\n\n2. Append 4 and 5 to the lst_d and define the id one more time.")
-lst_d = [1, 2, 3, 4, 5]
+lst_d.append(4)
+lst_d.append(5)
+print(lst_d)
 print("""Define the id of dict_e one more time 
 after appending 4 and 5=""", id(lst_d))
 
