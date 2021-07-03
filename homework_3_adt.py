@@ -35,11 +35,17 @@ check_isinstance_2 = isinstance("Anna has ___ apples and ___ peaches.", str)
 print("Checking the type of the objects by using isinstance. Attempt #1:", check_isinstance_1)
 print("Checking the type of the objects by using isinstance. Attempt #2:", check_isinstance_2)
 
+print("\nChecking the type of the objects by using isinstance. int_1 is integer?", isinstance(int_a, int))
+print("Checking the type of the objects by using isinstance. str_b is str?", isinstance(str_b, str))
+print("Checking the type of the objects by using isinstance. set_c is set?", isinstance(set_c, set))
+print("Checking the type of the objects by using isinstance. lst_d is list?", isinstance(lst_d, list))
+print("Checking the type of the objects by using isinstance. dict_e is dict?", isinstance(dict_e, dict))
+
 # 5. With .format and curly braces {}
 num_apples = 10
 num_peaches = 15
 print("\n\n5. With .format and curly braces {}")
-print("Anna has {} apples and {} peaches.".format(num_apples, num_peaches))
+print("Anna has {} apples and {} peaches.".format(10, 15))
 
 # 6. By passing index numbers into the curly braces.
 print("\n\n6. By passing index numbers into the curly braces.")
@@ -112,8 +118,6 @@ print(my_dict_3)
 
 # 18. Convert (7) to lambda function
 print("\n\n18. Convert (7) to lambda function")
-
-# (7)
 foo_lmb = lambda x, y: x if x < y else y
 print(foo_lmb(7, 6))
 
