@@ -16,7 +16,7 @@ print("\n\n2. Append 4 and 5 to the lst_d and define the id one more time.")
 lst_d.append(4)
 lst_d.append(5)
 print(lst_d)
-print("""Define the id of dict_e one more time 
+print("""Define the id of dict_e one more time
 after appending 4 and 5=""", id(lst_d))
 
 # 3. Define the type of each object from step 1.
@@ -126,13 +126,13 @@ print("\n\n19*. Convert (8) to regular function")
 
 
 def foo(x, y, z):
-    if y < x & x > z:
+    if x > y and x > z:
         return z
     else:
         return y
 
 
-print(foo(11, 7, 9))
+print(foo(10, 7.3, 11))
 
 # 20. Sort lst_to_sort from min to max
 print("\n\n20. Sort lst_to_sort from min to max")
@@ -153,7 +153,8 @@ print("\n\n23*. Raise each list number to the corresponding number on another li
 list_A = [2, 3, 4]
 list_B = [5, 6, 7]
 
-list_C = list(map(lambda x: x + 3, list_A))
+diff = list(map(lambda x, y: y - x, list_A, list_B))
+list_C = list(map(lambda x, y: x + y, list_A, diff))
 print(list_C)
 
 list_D = list(map(lambda x, y: x ** y, list_A, list_B))
@@ -176,7 +177,7 @@ sorted_lst_to_sort = list(filter(lambda x: (x % 2 == 1), lst_to_sort))
 print(sorted_lst_to_sort)
 
 # 26. Considering the range of values: b = range(-10, 10), use the function filter to return only negative numbers.
-print("""\n\n26. Considering the range of values: b = range(-10, 10), 
+print("""\n\n26. Considering the range of values: b = range(-10, 10),
 use the function filter to return only negative numbers.""")
 b = range(-10, 10)
 filtered_b = list(filter(lambda x: (x < 0), b))
