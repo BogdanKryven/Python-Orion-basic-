@@ -9,6 +9,7 @@ class TriangleArea:
         result = (p * (p - a) * (p - b) * (p - c)) ** 0.5
         return result
 
+
 class Example:
     pass
 

@@ -30,28 +30,34 @@ class Centaur(Person, Animals):
     def eat(self):
         print('eat')
 
+
 john = Centaur('John', 'Ters', 754, 'Horse')
 
 john.eat()
 
 print(Centaur.mro())
 
+
 class A:
     pass
+
     def process(self):
         print('A process()')
 
 
 class B:
     pass
+
     def process(self):
         print('B process()')
 
 
 class C(A, B):
     pass
+
     def process(self):
         print('C process()')
+
 
 class F:
     def process(self):
@@ -60,7 +66,6 @@ class F:
 
 class D(C, F):
     pass
-
 
 
 obj = D()
