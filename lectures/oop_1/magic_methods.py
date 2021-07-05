@@ -18,4 +18,4 @@ print(ex)
 
 area = TriangleArea()
 
-print(area(5, 4, 3))
+print(area(5, 3, 3))
