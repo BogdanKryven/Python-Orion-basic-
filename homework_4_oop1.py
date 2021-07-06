@@ -41,8 +41,6 @@ class School:
 
 
 class SchoolBus(Bus):
-    pass
-
     def bus_school_color():
         print("I'm painted yellow!")
 
