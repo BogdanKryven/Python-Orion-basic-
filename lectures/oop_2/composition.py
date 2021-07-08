@@ -10,5 +10,7 @@ class Page:
         self.content = content
 
 
-book = Book() # If I destroy this Book instance,
+book = Book()
+# If I destroy this Book instance,
 # the Page instances are also destroyed
+print(book.pages)

@@ -6,7 +6,7 @@ class Person:
         self.surname = surname
 
 
-anna = Person('Anna', 'Tech')
+anna = Person('Anna', 8.5)
 print(anna.__slots__)
-print(anna.name)
+print(anna.surname)
 # anna.test = 'abc'

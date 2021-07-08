@@ -17,8 +17,12 @@ class Person:
 anna = Person('Anna', 'Tech')
 anna.name = 'Alice'
 print(anna.full_name)
-# anna.full_name = 'Rob Sqad'
+anna.full_name = 'Rob Sqad'
 print(anna.name)
+
+
 def full_name():
     pass
+
+
 full_name = property(fget=full_name, fset=full_name)
