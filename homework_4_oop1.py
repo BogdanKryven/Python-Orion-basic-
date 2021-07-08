@@ -126,12 +126,12 @@ class AddMethod1:
 
     def __add__(self, other):
         if self.a > 10 or other.a > 10:
-            return self.a * other.a
+            self.a *= other.a
 
         return self.a.__add__(other.a)
 
 
-c1 = AddMethod1(9)
+c1 = AddMethod1(12)
 c2 = AddMethod1(2)
 c3 = c1 + c2
 print('Result =', c3)
