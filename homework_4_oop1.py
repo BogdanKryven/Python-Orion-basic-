@@ -117,6 +117,25 @@ c2 = AddMethod(11)
 c3 = c1 + c2
 print('Result =', c3)
 
+# ----------------------------------------------------------------------------------------------------
+
+
+class AddMethod1:
+    def __init__(self, a):
+        self.a = a
+
+    def __add__(self, other):
+        if self.a > 10 or other.a > 10:
+            return self.a * other.a
+
+        return self.a.__add__(other.a)
+
+
+c1 = AddMethod1(9)
+c2 = AddMethod1(2)
+c3 = c1 + c2
+print('Result =', c3)
+
 
 # 11. The __call__ method enables Python programmers to write classes where the instances
 # behave like functions and can be called like a function.
