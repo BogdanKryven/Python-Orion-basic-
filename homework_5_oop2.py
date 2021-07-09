@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from collections import namedtuple
 
+
 # 1.
 
 
@@ -118,6 +119,8 @@ address_book = AddressBookDataClass('2', 'Elvis', '+1-064-458-1574', '765 Route 
 
 print(address_book.age)
 print(address_book[5])
+
+
 # 8.
 
 
@@ -126,6 +129,7 @@ class AddressBook:
     Create regular class taking 7 params on init - key, name, phone_number, address, email, birthday, age
     Make its str() representation the same as for AddressBookDataClass defined above.
     """
+
     def __init__(self, key, name, phone_number, address, email, birthday, age):
         self.key = key
         self.name = name
@@ -145,12 +149,13 @@ class AddressBook:
 
 
 address_book_info = AddressBook('2', 'Elvis', '+1-064-458-1574', '765 Route VT 123 Brenton, CA 07634',
-                                    'elvispresley2@gmail.com', 'April 19th 1976', 45)
+                                'elvispresley2@gmail.com', 'April 19th 1976', 45)
 
 print(address_book_info)
 print(address_book_info.__str__())
 print(str(address_book_info))
 print(address_book_info.__repr__())
+
 
 # 9.
 
@@ -162,6 +167,11 @@ class Person:
     name = "John"
     age = 36
     country = "USA"
+
+
+d = Person()
+setattr(d, 'age', 33)
+print(getattr(d, 'age'))
 
 
 # 10.
@@ -180,6 +190,10 @@ class Student:
         self.name = name
 
 
+p = Student(1, 'Bohdan')
+setattr(p, 'age', 20)
+print("My name is", getattr(p, 'name'), "and I'm", getattr(p, 'age'), "years old.")
+
 # 11*.
 
 
@@ -192,7 +206,17 @@ class Celsius:
     def __init__(self, temperature=0):
         self._temperature = temperature
 
+    @property
+    def convert(self):
+        fahrenheit = (self._temperature * 1.8) + 32
+        return fahrenheit
+
+    @convert.setter
+    def convert(self, new):
+        print(f'Converted celsius to fahrenheit: {new}')
+
+
 # create an object
-# {obj} = ...
-#
-# print({obj}.temperature)
+{obj} = ...
+
+print({obj}.temperature)
