@@ -71,8 +71,8 @@ class Concert:
 
     @visitors_count.setter
     def visitors_count(self, value):
-        self.count = Concert.max_visitor_num if value > Concert.max_visitor_num else value
-        # self.count = value if value <= Concert.max_visitor_num else Concert.max_visitor_num
+        # self.count = Concert.max_visitor_num if value > Concert.max_visitor_num else value
+        self.count = value if value <= Concert.max_visitor_num else Concert.max_visitor_num
 
 
 Concert.max_visitor_num = 50
@@ -81,6 +81,8 @@ concert.visitors_count = 1000
 print(concert.visitors_count)
 
 # 6.
+
+
 class AddressBookDataClass:
     """
     Create dataclass with 7 fields - key (int), name (str), phone_number (str), address (str), email (str), birthday (str), age (int)
