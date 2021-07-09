@@ -126,7 +126,31 @@ class AddressBook:
     Create regular class taking 7 params on init - key, name, phone_number, address, email, birthday, age
     Make its str() representation the same as for AddressBookDataClass defined above.
     """
+    def __init__(self, key, name, phone_number, address, email, birthday, age):
+        self.key = key
+        self.name = name
+        self.phone_number = phone_number
+        self.address = address
+        self.email = email
+        self.birthday = birthday
+        self.age = age
 
+    def __str__(self):
+        return f'AddressBookDatsClass(key={self.key}, name={self.name}, phone_number={self.phone_number}, ' \
+               f'address={self.address}, email={self.email}, birthday={self.birthday}, age={self.age}'
+
+    def __repr__(self):
+        return f'AddressBookDatsClass(key={self.key}, name={self.name}, phone_number={self.phone_number}, ' \
+               f'address={self.address}, email={self.email}, birthday={self.birthday}, age={self.age}'
+
+
+address_book_info = AddressBook('2', 'Elvis', '+1-064-458-1574', '765 Route VT 123 Brenton, CA 07634',
+                                    'elvispresley2@gmail.com', 'April 19th 1976', 45)
+
+print(address_book_info)
+print(address_book_info.__str__())
+print(str(address_book_info))
+print(address_book_info.__repr__())
 
 # 9.
 
