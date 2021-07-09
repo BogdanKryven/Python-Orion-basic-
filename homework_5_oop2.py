@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-
+from collections import namedtuple
 
 # 1.
 
@@ -94,24 +94,6 @@ print(concert.visitors_count)
 
 
 # 6.
-
-#
-# @dataclasses.dataclass
-# class AddressBookDataClass:
-#     key: str
-#     name: str
-#     phone_number: str
-#     address: str
-#     email: str
-#     birthday: str
-#     age: int
-#
-#     address_book = AddressBookDataClass('1', 'Bob', '+1-032-246-1037', '555 Route VT 78 Swanton, VT 05488',
-#                                         'bobmarley1@gmail.com')
-#     print(address_book)
-#
-#     a = AddressBookDataClass()
-
 @dataclass
 class AddressBookDataClass:
     key: str
@@ -128,6 +110,14 @@ address_book = AddressBookDataClass('1', 'Bob', "+1-032-246-1037", '555 Route VT
 print(address_book)
 
 # 7. Create the same class (6) but using NamedTuple
+AddressBookDataClass = namedtuple('AddressBookDataClass', ['key', 'name', 'phone_number0', 'address', 'email',
+                                                           'birthday', 'age'])
+
+address_book = AddressBookDataClass('2', 'Elvis', '+1-064-458-1574', '765 Route VT 123 Brenton, CA 07634',
+                                    'elvispresley2@gmail.com', 'April 19th 1976', 45)
+
+print(address_book.age)
+print(address_book[5])
 # 8.
 
 
