@@ -1,4 +1,9 @@
+from dataclasses import dataclass
+
+
 # 1.
+
+
 class Laptop:
     def __init__(self):
         battery = Battery("Battery fot laptop")
@@ -10,6 +15,8 @@ class Battery:
 
 
 asus = Laptop()
+
+
 # 2.
 
 
@@ -25,6 +32,8 @@ class GuitarString:
 
 guitar_string1 = GuitarString()
 guitar = Guitar(guitar_string1)
+
+
 # 3
 
 
@@ -35,6 +44,8 @@ class Calc:
 
 
 print(Calc.add_nums(2, 3, 4))
+
+
 # 4*.
 
 
@@ -55,11 +66,12 @@ pasta_1 = Pasta(["tomato", "cucumber"])
 print(pasta_1.ingredients)
 pasta_2 = Pasta.bolognaise()
 print(pasta_2.ingredients)
+
+
 # 5*.
 
 
 class Concert:
-
     max_visitor_num = 0
 
     def __init__(self):
@@ -80,22 +92,55 @@ concert = Concert()
 concert.visitors_count = 1000
 print(concert.visitors_count)
 
+
 # 6.
 
+#
+# @dataclasses.dataclass
+# class AddressBookDataClass:
+#     key: str
+#     name: str
+#     phone_number: str
+#     address: str
+#     email: str
+#     birthday: str
+#     age: int
+#
+#     address_book = AddressBookDataClass('1', 'Bob', '+1-032-246-1037', '555 Route VT 78 Swanton, VT 05488',
+#                                         'bobmarley1@gmail.com')
+#     print(address_book)
+#
+#     a = AddressBookDataClass()
 
+@dataclass
 class AddressBookDataClass:
-    """
-    Create dataclass with 7 fields - key (int), name (str), phone_number (str), address (str), email (str), birthday (str), age (int)
-    """
+    key: str
+    name: str
+    phone_number: str
+    address: str
+    email: str
+    birthday: str
+    age: int
+
+
+address_book = AddressBookDataClass('1', 'Bob', "+1-032-246-1037", '555 Route VT 78 Swanton, VT 05488',
+                                    'bobmarley1@gmail.com', 'March 27th 1998', 23)
+print(address_book)
 
 # 7. Create the same class (6) but using NamedTuple
 # 8.
+
+
 class AddressBook:
     """
     Create regular class taking 7 params on init - key, name, phone_number, address, email, birthday, age
     Make its str() representation the same as for AddressBookDataClass defined above.
     """
+
+
 # 9.
+
+
 class Person:
     """
     Change the value of the age property of the person object
@@ -104,7 +149,10 @@ class Person:
     age = 36
     country = "USA"
 
+
 # 10.
+
+
 class Student:
     """
     Add an 'email' attribute of the object student and set its value
@@ -117,15 +165,18 @@ class Student:
         self.id = id
         self.name = name
 
+
 # 11*.
+
+
 class Celsius:
     """
     By using @property convert the celsius to fahrenheit
     Hint: (temperature * 1.8) + 32)
     """
+
     def __init__(self, temperature=0):
         self._temperature = temperature
-
 
 # create an object
 # {obj} = ...
