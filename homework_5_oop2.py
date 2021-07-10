@@ -90,9 +90,38 @@ class Concert:
 
 Concert.max_visitor_num = 50
 concert = Concert()
-concert.visitors_count = 1000
-print(concert.visitors_count)
+concert1 = Concert()
 
+concert.visitors_count = 1000
+concert1.visitors_count = 49
+print(concert.visitors_count)
+print(concert1.visitors_count)
+
+
+# ----------------------------------------------------------------------------------------------------------
+
+class ConcertV1:
+    max_visitor_number = 0
+
+    def __init__(self, visitor_count=0):
+        self.visitor_count = visitor_count
+
+    @property
+    def visitor_count(self):
+        return self._visitor_count
+
+    @visitor_count.setter
+    def visitor_count(self, value):
+        self._visitor_count = value if value <= ConcertV1.max_visitor_number else ConcertV1.max_visitor_number
+
+
+ConcertV1.max_visitor_number = 50
+concert = ConcertV1()
+concert.visitor_count = 1000
+
+concert1 = ConcertV1(49)
+print(concert.visitor_count)
+print(concert1.visitor_count)
 
 # 6.
 @dataclass
@@ -193,6 +222,7 @@ class Student:
 p = Student(1, 'Bohdan')
 setattr(p, 'age', 20)
 print("My name is", getattr(p, 'name'), "and I'm", getattr(p, 'age'), "years old.")
+
 
 # 11*.
 
