@@ -207,16 +207,14 @@ class Celsius:
         self._temperature = temperature
 
     @property
-    def convert(self):
+    def temperature(self):
         fahrenheit = (self._temperature * 1.8) + 32
         return fahrenheit
 
-    @convert.setter
-    def convert(self, new):
+    @temperature.setter
+    def temperature(self, new):
         print(f'Converted celsius to fahrenheit: {new}')
 
 
-# create an object
-{obj} = ...
-
-print({obj}.temperature)
+temp_1 = Celsius(34)
+print(temp_1.temperature)
