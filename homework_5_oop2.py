@@ -220,8 +220,8 @@ class Student:
 
 
 p = Student(1, 'Bohdan')
-setattr(p, 'age', 20)
-print("My name is", getattr(p, 'name'), "and I'm", getattr(p, 'age'), "years old.")
+setattr(p, 'email', 'xxx@xxx.com')
+print("My name is", getattr(p, 'name'), "and Its my email:", getattr(p, 'email'))
 
 
 # 11*.
