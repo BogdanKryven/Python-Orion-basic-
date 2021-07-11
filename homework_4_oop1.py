@@ -71,31 +71,54 @@ for animal in (bear, wolf):
 # a new instance only when population > 1500,
 # otherwise return message: "Your city is too small".
 
-# 9. Override a printable string representation of the City class and return:
-# The population of the city {name} is {population}
 
+class City(object):
 
-class City:
+    def __new__(cls, name, population):
+        if population > 1500:
+            return object.__new__(cls)
+        else:
+            return f'Your city is too small'
+
     def __init__(self, name, population):
         self.name = name
         self.population = population
-
-    def city_size(self):
-        if self.population > 1500:
-            # return self.population
-            # It's to 8 point
-            return f"The population of the city {self.name} is {self.population}"
-        else:
-            return "Your city is too small"
 
 
 lviv = City('Lviv', 720000)
 kyiv = City('Kyiv', 2800000)
 lysynychi = City('Lysynychi', 1200)
+print(lviv)
+print(kyiv)
+print(lysynychi)
 
-for city_population in (lviv, kyiv, lysynychi):
-    print(city_population.city_size())
 
+# 9. Override a printable string representation of the City class and return:
+# The population of the city {name} is {population}
+
+
+class City:
+
+    def __new__(cls, name, population):
+        if population > 1500:
+            return super().__new__(cls)
+        else:
+            return f'Your city is too small'
+
+    def __init__(self, name, population):
+        self.name = name
+        self.population = population
+
+    def __str__(self):
+        return f'The population of the city {self.name} is {self.population}'
+
+
+lviv = City('Lviv', 720000)
+kyiv = City('Kyiv', 2800000)
+lysynychi = City('Lysynychi', 1200)
+print(lviv)
+print(kyiv)
+print(lysynychi)
 
 # 10*. Override magic method __add__() to perform the additional action as
 # 'multiply' (*) the value which is greater than 10. And perform this add (+) of two instances.
@@ -116,6 +139,7 @@ c1 = AddMethod(10)
 c2 = AddMethod(11)
 c3 = c1 + c2
 print('Result =', c3)
+
 
 # ----------------------------------------------------------------------------------------------------
 
