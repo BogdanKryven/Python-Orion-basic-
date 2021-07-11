@@ -40,12 +40,13 @@ guitar = Guitar(guitar_string1)
 
 class Calc:
     @staticmethod
-    def add_nums(a, b, c):
+    def add_nums(a=0, b=0, c=0) -> (int, float):
         return a + b + c
 
 
-print(Calc.add_nums(2, 3, 4))
-
+d = Calc.add_nums(3, 4.9)
+print(d)
+print(type(d))
 
 # 4*.
 
