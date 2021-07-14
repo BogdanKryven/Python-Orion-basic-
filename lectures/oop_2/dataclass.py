@@ -1,5 +1,6 @@
 import dataclasses
 
+
 @dataclasses.dataclass
 class Article:
     topic: str
@@ -8,9 +9,11 @@ class Article:
     author: str
     page: int
 
+
 class Info:
     name: str
     surname: str
+
 
 article = Article('OOP lecture 2', 'Rostyslav Kitsylinksyy', 'EN', 'Rostyslav', '17')
 article_1 = Article('OOP lecture 3', 'Rostyslav Kitsylinksyy', 'EN', 'Rostyslav', 27)
@@ -33,6 +36,7 @@ print(article_dict['topic'])
 class Book:
     title: str
     author: str
+
 
 book = Book('Kobzar', 'Shevchenko')
 book_1 = Book('Лісова Пісня', 'Леся Українка')

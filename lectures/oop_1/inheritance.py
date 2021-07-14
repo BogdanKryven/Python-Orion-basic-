@@ -17,14 +17,12 @@ class Student(Person):
         print(f'I am learning {self.subject}')
 
 
-
 john = Person('John', 'Barbie', 32)
 john.print_info()
 
 mike = Student('Math', 'Mike', 'Torse', 20)
 mike.print_info()
 mike.learn()
-
 
 check = isinstance(mike, Student)
 check_sub = issubclass(Student, Person)
