@@ -208,7 +208,7 @@ class Pests:
 
     # def eat_apples(self, tree: AppleTree):
     #     count_of_apples = 0
-    #     for count_of_apples in tree.apples:
+    #     for count_of_apples in tree.apples: f
     #         pass
 
     def kill(self):
