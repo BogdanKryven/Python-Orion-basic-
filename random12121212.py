@@ -1,8 +1,7 @@
-import random
 from abc import abstractmethod
-
-
 # from random import randrange
+import random
+
 
 
 class GardenMeta(type):
@@ -139,7 +138,10 @@ class TomatoBush:
 class AppleTree:
     def __init__(self, apples):
         self.apples = [Apple('White', index) for index in range(0, apples)]
-        self.sum_of_apples = len(self.apples)
+        # self.sum_of_apples = len(self.apples)
+
+    def count_of_apples(self):
+        return len(self.apples)
 
     def growth_all(self):
         for apple in self.apples:
@@ -227,14 +229,21 @@ class Pests:
     #         print(f"I ate {self.number_of_pests} apples! {tree.apples_left} apples left")
     #     return tree.apples_left
 
+    # def eat_fruit(self, tree: AppleTree):
+    #     for _ in tree.apples:
+    #         for pest in range(0, self.number_of_pests - 1):
+    #             tree.apples.pop()
+
     def eat_fruit(self, tree: AppleTree):
         if tree.all_are_ripe() or tree.all_are_not_ripe():
-            tree.apples_left = tree.sum_of_apples - self.number_of_pests
-            if tree.apples_left >= 0:
-                print(f"There are left {tree.apples_left} apples")
+            for _ in range(self.number_of_pests):
+                if len(tree.apples) >= 1:
+                    tree.apples.pop()
+            apples_left = len(tree.apples)
+            if apples_left >= 0:
+                print(f"There are left {apples_left} apples")
             else:
-                print(f"There are left {tree.apples_left} apples")
-        tree.sum_of_apples = tree.apples_left
+                print(f"There are left 0 apples")
 
     def kill(self):
         self.number_of_pests = 0
@@ -245,8 +254,8 @@ class Pests:
 
 
 tomato_bush = TomatoBush(0)
-apple_tree = AppleTree(5)
-pests = Pests('worms', 3)
+apple_tree = AppleTree(15)
+pests = Pests('worms', randint(0, 5))
 # print("Sum of apples = ", apple_tree.sum_of_apples)
 # Сума всіх яблук
 
@@ -267,7 +276,7 @@ John.check_states(pests)
 # Показує статус чи є шкідники чи їх немає. Видає повідомлення що все ок, чи треба провести чистку "handling"
 # pests.eat_fruit(apple_tree)
 #
-pests.eat_fruit(apple_tree)
+# pests.eat_fruit(apple_tree)
 # Шкідники їдять фрукти
 
 # print("\n", John.handling(pests))
@@ -282,8 +291,27 @@ print("\n", pests.show_the_pests())
 
 print(type(pests.count_of_pests()))
 
+# print(len(apple_tree.apples))
+# print(pests.number_of_pests)
 
-print(len(apple_tree.apples))
-print(pests.number_of_pests)
 pests.eat_fruit(apple_tree)
-# pests.eat_fruit(apple_tree)
+pests.eat_fruit(apple_tree)
+pests.eat_fruit(apple_tree)
+pests.eat_fruit(apple_tree)
+pests.eat_fruit(apple_tree)
+
+
+print(apple_tree.count_of_apples())
+
+
+
+
+
+
+
+
+
+
+
+
+

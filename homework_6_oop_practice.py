@@ -1,8 +1,5 @@
-import random
 from abc import abstractmethod
-
-
-# from random import randrange
+from random import randrange
 
 
 class GardenMeta(type):
@@ -20,20 +17,19 @@ class GardenMeta(type):
 
 
 class Garden(metaclass=GardenMeta):
-    def __init__(self, vegetables, fruits, pests, gardener):
-        # як воно з'єднується з іншими класами?!?!?!?! тут ж інші атрибути. Як воно взагалі все з'єднується я не розумію
+    def __init__(self, vegetables, fruits, fruit_pests, vegetable_pests, gardener):
         self.vegetables = vegetables
         self.fruits = fruits
-        self.pests = pests
+        self.fruit_pests = fruit_pests
+        self.vegetable_pests = vegetable_pests
         self.gardener = gardener
 
     def show_the_garden(self):
         print(f'I have such vegetables {len(self.vegetables)}')
         print(f'I have such fruits {len(self.fruits)}')
-        print(f'I have such pests {self.pests}')
-        # чому в овочах і фруктах працює лен а в шкідниках ні?? як можна зробити так щоб умова виконувалась?
-        print(f"I'm a gardener {self.gardener}!")
-        # як тут вивести його ім'я ?
+        print(f'I have such fruit pests {self.fruit_pests}')
+        print(f'I have such vegetable pests {self.vegetable_pests}')
+        print(f"I'm a gardener {self.gardener}!\n")
 
 
 class Vegetables:
@@ -84,8 +80,8 @@ class Tomato(Vegetables):
     def is_ripe(self):
         return self.states == 3
 
-    def is_fruit(self):
-        return self.states == 2 and self.states == 3
+    def is_not_ripe(self):
+        return self.states == 2
 
 
 class Apple(Fruits):
@@ -114,32 +110,29 @@ class TomatoBush:
     def __init__(self, number_of_tomatoes):
         self.tomatoes = [Tomato('Cherry', index) for index in range(0, number_of_tomatoes - 1)]
 
+    def count_of_tomatoes(self):
+        return len(self.tomatoes)
+
     def growth_all(self):
         for tomato in self.tomatoes:
             tomato.growth()
 
-    # def all_are_ripe(self):
-    #   lst = []
-    #   for tomato in self.tomatoes:
-    #     ripe_state = tomato.is_ripe()
-    #       lst.append(ripe_state)
-    #   return all(lst)
-
     def all_are_ripe(self):
         return all([tomato.is_ripe() for tomato in self.tomatoes])
 
+    def all_are_not_ripe(self):
+        return all([apple.is_not_ripe() for apple in self.tomatoes])
+
     def give_away_all(self):
         self.tomatoes = []
-
-    def tomato_losses(self):
-        for tomato in self.tomatoes:
-            tomato -= 1
 
 
 class AppleTree:
     def __init__(self, apples):
         self.apples = [Apple('White', index) for index in range(0, apples)]
-        # self.sum_of_apples = [Apple("White", sum(i)) for i in range(0, apples - 1))]
+
+    def count_of_apples(self):
+        return len(self.apples)
 
     def growth_all(self):
         for apple in self.apples:
@@ -153,22 +146,6 @@ class AppleTree:
 
     def give_away_all(self):
         self.apples = []
-
-    def type_of_apples(self):
-        return self.type_of_apples()
-
-    @property
-    def sum_of_apples(self):
-        count_apples = 0
-        for apple in self.apples:
-            count_apples += apple.number_of_apples
-        return count_apples
-
-    @sum_of_apples.setter
-    def sum_of_apples(self, value):
-        if self.all_are_ripe() or self.all_are_not_ripe():
-            self.sum_of_apples = self.sum_of_apples - Pests.count_of_pests(value)
-            self.sum_of_apples = value
 
 
 class Gardener:
@@ -200,9 +177,6 @@ class Gardener:
         pest.kill()
 
 
-# то саме. як тут видалити тих жуків повністю?!?! маю ідею про використання атрибуту іншого класу. але шось не працює
-# перевірив і воно працює тільки коли цей клас я описую після класу pests інакше толку ноль
-
 class Pests:
 
     def __init__(self, type_of_pests, number_of_pests):
@@ -213,21 +187,31 @@ class Pests:
     def show_the_pests(self):
         return f"I'm a {self.type_of_pests} pest! We are {self.number_of_pests} pieces!"
 
-    # def eat_fruit(self, tree: AppleTree):
-    #     if tree.all_are_ripe() or tree.all_are_not_ripe():
-    #         tree.apples_left = tree.sum_of_apples() - self.number_of_pests
-    #         print(f"I ate {self.number_of_pests} apples! {tree.apples_left} apples left")
-    #     return tree.apples_left
-
-    # def eat_fruit(self, tree: AppleTree):
-    #     if tree.all_are_ripe() or tree.all_are_not_ripe():
-    #         tree.apples_left = tree.sum_of_apples - self.number_of_pests
-    #         print(f"I ate {self.number_of_pests} apples! {tree.apples_left} apples left")
-    #     return tree.apples_left
-
     def eat_fruit(self, tree: AppleTree):
-        return tree.sum_of_apples()
+        if tree.all_are_ripe() or tree.all_are_not_ripe():
+            for _ in range(self.number_of_pests):
+                if len(tree.apples) >= 1:
+                    tree.apples.pop()
+            apples_left = len(tree.apples)
+            if self.number_of_pests == 0:
+                print(f"\nThere are {apples_left} APPLES.")
+            elif apples_left > 0 and self.number_of_pests >= 1:
+                print(f"There are left {apples_left} APPLES. You must kill all pests!")
+            else:
+                print(f"There are left 0 APPLES. The harvest is lost.")
 
+    def eat_vegetables(self, bush: TomatoBush):
+        if bush.all_are_ripe() or bush.all_are_not_ripe():
+            for _ in range(self.number_of_pests):
+                if len(bush.tomatoes) >= 1:
+                    bush.tomatoes.pop()
+            tomatoes_left = len(bush.tomatoes)
+            if self.number_of_pests == 0:
+                print(f"/nThere are {tomatoes_left} TOMATOES.")
+            elif tomatoes_left > 0 and self.number_of_pests >= 1:
+                print(f"There are left {tomatoes_left} TOMATOES!. You must kill all pests!")
+            else:
+                print(f"There are left 0 TOMATOES. The harvest is lost.")
 
     def kill(self):
         self.number_of_pests = 0
@@ -237,39 +221,48 @@ class Pests:
         return self.number_of_pests
 
 
-tomato_bush = TomatoBush(0)
-apple_tree = AppleTree(5)
-pests = Pests('worms', 3)
-print("Sum of apples = ", apple_tree.sum_of_apples)
-# Сума всіх яблук
+tomato_bush = TomatoBush(5)
+apple_tree = AppleTree(8)
+pests_fruit = Pests('worms', randrange(0, 5))
+pests_vegetable = Pests('snails', randrange(0, 3))
 
-print("\n", pests.show_the_pests())
+print("Sum of apples =", apple_tree.count_of_apples())
+print("Sum of tomatoes =", tomato_bush.count_of_tomatoes(), "\n")
+# Сума всіх яблук і сума всіх помідорів (корзин яблук і помідорів)
+
+print(pests_fruit.show_the_pests())
+print(pests_vegetable.show_the_pests(), "\n")
 # Кількість шкідників
 
 John = Gardener('John', [tomato_bush, apple_tree])
-garden = Garden(vegetables=tomato_bush.tomatoes, fruits=apple_tree.apples, pests=pests.number_of_pests,
-                gardener=John.name)
-# Детальніше пояснити за "tomato_bush.tomatoes" як воно працює і за інші атрибути. ЗВІДКИ ТІ "apples" "tomatoes"????????
+garden = Garden(vegetables=tomato_bush.tomatoes, fruits=apple_tree.apples, fruit_pests=pests_fruit.number_of_pests,
+                vegetable_pests=pests_vegetable.number_of_pests, gardener=John.name)
 
 garden.show_the_garden()
 # Показ саду (скільки чого є)
 John.work()
 John.work()
+print("\n")
 
-
-John.check_states(pests)
+John.check_states(pests_fruit)
+John.check_states(pests_vegetable)
 # Показує статус чи є шкідники чи їх немає. Видає повідомлення що все ок, чи треба провести чистку "handling"
-pests.eat_fruit(apple_tree)
+
+pests_fruit.eat_fruit(apple_tree)
+pests_fruit.eat_fruit(apple_tree)
 # Шкідники їдять фрукти
+pests_vegetable.eat_vegetables(tomato_bush)
+pests_vegetable.eat_vegetables(tomato_bush)
+# Шкідники їдять овочі
 
-# print("\n", John.handling(pests))
-John.handling(pests)
+John.handling(pests_fruit)
+John.handling(pests_vegetable)
 # Джон вбиває негадяїв
-John.check_states(pests)
-print("\n", pests.show_the_pests())
+
+John.check_states(pests_fruit)
+John.check_states(pests_vegetable)
+
+print("\n", pests_fruit.show_the_pests())
+print("\n", pests_vegetable.show_the_pests())
+
 # Показує нову кількість шкідників
-
-pests.eat_fruit(apple_tree)
-# print(apple_tree.summa_of_apples)
-
-print(type(pests.count_of_pests()))
