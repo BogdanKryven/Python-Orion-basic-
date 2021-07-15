@@ -152,7 +152,7 @@ class Gardener:
     def __init__(self, name, plants):
         self.name = name
         self.plants = plants
-        # self.pests = pests
+        self.pest = Pests
 
     def work(self):
         for plant in self.plants:
@@ -165,16 +165,27 @@ class Gardener:
             else:
                 print('Too early to harvest')
 
-    @staticmethod
-    def check_states(pest):
+    def check_states(self, pest):
+        self.pest = pest
         if pest.number_of_pests > 0:
             print(f"There are {pest.number_of_pests} pests! You need to handling!")
         else:
             print(f"Everything is fine with the garden! There are {pest.number_of_pests} pests!")
 
-    @staticmethod
-    def handling(pest):
+    def handling(self, pest):
+        self.pest = pest
         pest.kill()
+
+    # @staticmethod
+    # def check_states(pest):
+    #     if pest.number_of_pests > 0:
+    #         print(f"There are {pest.number_of_pests} pests! You need to handling!")
+    #     else:
+    #         print(f"Everything is fine with the garden! There are {pest.number_of_pests} pests!")
+
+    # @staticmethod
+    # def handling(pest):
+    #     pest.kill()
 
 
 class Pests:
@@ -194,7 +205,7 @@ class Pests:
                     tree.apples.pop()
             apples_left = len(tree.apples)
             if self.number_of_pests == 0:
-                print(f"\nThere are {apples_left} APPLES.")
+                print(f"There are {apples_left} APPLES.")
             elif apples_left > 0 and self.number_of_pests >= 1:
                 print(f"There are left {apples_left} APPLES. You must kill all pests!")
             else:
@@ -207,7 +218,7 @@ class Pests:
                     bush.tomatoes.pop()
             tomatoes_left = len(bush.tomatoes)
             if self.number_of_pests == 0:
-                print(f"/nThere are {tomatoes_left} TOMATOES.")
+                print(f"There are {tomatoes_left} TOMATOES.")
             elif tomatoes_left > 0 and self.number_of_pests >= 1:
                 print(f"There are left {tomatoes_left} TOMATOES!. You must kill all pests!")
             else:
