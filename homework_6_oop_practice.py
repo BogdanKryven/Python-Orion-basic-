@@ -139,6 +139,7 @@ class TomatoBush:
 class AppleTree:
     def __init__(self, apples):
         self.apples = [Apple('White', index) for index in range(0, apples - 1)]
+        # self.sum_of_apples = [Apple("White", sum(i)) for i in range(0, apples - 1))]
 
     def growth_all(self):
         for apple in self.apples:
@@ -147,14 +148,39 @@ class AppleTree:
     def all_are_ripe(self):
         return all([apple.is_ripe() for apple in self.apples])
 
+    def all_are_not_ripe(self):
+        return all([apple.is_not_ripe() for apple in self.apples])
+
     def give_away_all(self):
         self.apples = []
 
     def type_of_apples(self):
         return self.type_of_apples()
 
-    # def numbers_of_apples(self):
-    #     return len(self.apples)
+    @property
+    def sum_of_apples(self):
+        count_apples = 0
+        for apple in self.apples:
+            count_apples += apple.number_of_apples
+        return count_apples
+
+    @sum_of_apples.setter
+    def sum_of_apples(self, value):
+        self.apples = value.eat_fruit
+
+    # def sum_of_apples(self):
+    #     count_apples = 0
+    #     for apple in self.apples:
+    #         count_apples += apple.number_of_apples
+    #     # count_apples = 0
+    #     return count_apples
+    #     return f"Sum of apples = {count_apples}"
+    #     print(f"Sum of apples = {count_apples}")
+
+
+    # @sum_of_apples.setter
+    # def sum_of_apples(self, value):
+    #     self._sum_of_apples = value
 
 
 class Gardener:
@@ -200,16 +226,16 @@ class Pests:
         return f"I'm a {self.type_of_pests} pest! We are {self.number_of_pests} pieces!"
 
     # def eat_fruit(self, tree: AppleTree):
-    #     for _ in range(self.number_of_pests):
-    #         apple_id = random.randint(0, len(tree.apples) - 1)
-    #         if tree.apples[apple_id].is_ripe() or tree.apples[apple_id].is_not_ripe():
-    #             print(f"I'm eating apple!!!I'm eating apple!!! --> ")
-    #             tree.apples.pop()
+    #     if tree.all_are_ripe() or tree.all_are_not_ripe():
+    #         tree.apples_left = tree.sum_of_apples() - self.number_of_pests
+    #         print(f"I ate {self.number_of_pests} apples! {tree.apples_left} apples left")
+    #     return tree.apples_left
 
-    # def eat_apples(self, tree: AppleTree):
-    #     count_of_apples = 0
-    #     for count_of_apples in tree.apples: f
-    #         pass
+    def eat_fruit(self, tree: AppleTree):
+        if tree.all_are_ripe() or tree.all_are_not_ripe():
+            tree.value = tree.sum_of_apples - self.number_of_pests
+            print(f"I ate {self.number_of_pests} apples! {tree.sum_of_apples} apples left")
+        return tree.value
 
     def kill(self):
         self.number_of_pests = 0
@@ -218,18 +244,41 @@ class Pests:
 
 tomato_bush = TomatoBush(0)
 apple_tree = AppleTree(5)
-pests = Pests('worms', 2)
+pests = Pests('worms', 3)
+print("Sum of apples = ", apple_tree.sum_of_apples)
+# Сума всіх яблук
 
-print(pests.show_the_pests())
+print("\n", pests.show_the_pests())
+# Кількість шкідників
+
 John = Gardener('John', [tomato_bush, apple_tree])
 garden = Garden(vegetables=tomato_bush.tomatoes, fruits=apple_tree.apples, pests=pests.number_of_pests, gardener=John)
 # Детальніше пояснити за "tomato_bush.tomatoes" як воно працює і за інші атрибути. ЗВІДКИ ТІ "apples" "tomatoes"????????
 
 garden.show_the_garden()
+# Показ саду (скільки чого є)
+John.work()
+John.work()
+
+
 John.check_states(pests)
-John.handling(pests)
+# Показує статус чи є шкідники чи їх немає. Видає повідомлення що все ок, чи треба провести чистку "handling"
+pests.eat_fruit(apple_tree)
+# pests.eat_fruit(apple_tree)
+
+# Шкідники їдять фрукти
+
+# print("\n", John.handling(pests))
+# John.handling(pests)
+# Джон вбиває негадяїв
 John.check_states(pests)
-print(pests.show_the_pests())
+print("\n", pests.show_the_pests())
+# Показує нову кількість шкідників
+
+pests.eat_fruit(apple_tree)
+print(apple_tree.sum_of_apples)
+print("lalallala", pests.number_of_pests)
+pests.eat_fruit(apple_tree)
 
 # John.work()
 # John.work()
