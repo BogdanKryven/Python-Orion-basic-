@@ -138,7 +138,7 @@ class TomatoBush:
 
 class AppleTree:
     def __init__(self, apples):
-        self.apples = [Apple('White', index) for index in range(0, apples - 1)]
+        self.apples = [Apple('White', index) for index in range(0, apples)]
         # self.sum_of_apples = [Apple("White", sum(i)) for i in range(0, apples - 1))]
 
     def growth_all(self):
@@ -165,18 +165,14 @@ class AppleTree:
         return count_apples
 
     @sum_of_apples.setter
-    def sum_of_apples(self, value):
-        self.apples = value.eat_fruit
+    def sum_of_apples(self, pest):
+        self.apples = pest.eat_fruit()
 
     # def sum_of_apples(self):
     #     count_apples = 0
     #     for apple in self.apples:
     #         count_apples += apple.number_of_apples
-    #     # count_apples = 0
     #     return count_apples
-    #     return f"Sum of apples = {count_apples}"
-    #     print(f"Sum of apples = {count_apples}")
-
 
     # @sum_of_apples.setter
     # def sum_of_apples(self, value):
@@ -233,9 +229,9 @@ class Pests:
 
     def eat_fruit(self, tree: AppleTree):
         if tree.all_are_ripe() or tree.all_are_not_ripe():
-            tree.value = tree.sum_of_apples - self.number_of_pests
-            print(f"I ate {self.number_of_pests} apples! {tree.sum_of_apples} apples left")
-        return tree.value
+            tree.apples_left = tree.sum_of_apples - self.number_of_pests
+            print(f"I ate {self.number_of_pests} apples! {tree.apples_left} apples left")
+        return tree.apples_left
 
     def kill(self):
         self.number_of_pests = 0
