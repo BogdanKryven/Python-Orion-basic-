@@ -201,15 +201,17 @@ class Pests:
     def eat_fruit(self, tree: AppleTree):
         if tree.all_are_ripe() or tree.all_are_not_ripe():
             for _ in range(self.number_of_pests):
-                if len(tree.apples) >= 1:
+                if not []:
                     tree.apples.pop()
             apples_left = len(tree.apples)
             if self.number_of_pests == 0:
                 print(f"There are {apples_left} APPLES.")
-            elif apples_left > 0 and self.number_of_pests >= 1:
+            elif apples_left >= 1 and self.number_of_pests >= 1:
                 print(f"There are left {apples_left} APPLES. You must kill all pests!")
             else:
                 print(f"There are left 0 APPLES. The harvest is lost.")
+        else:
+            print("To early to eat fruit plants!")
 
     def eat_vegetables(self, bush: TomatoBush):
         if bush.all_are_ripe() or bush.all_are_not_ripe():
@@ -223,13 +225,12 @@ class Pests:
                 print(f"There are left {tomatoes_left} TOMATOES!. You must kill all pests!")
             else:
                 print(f"There are left 0 TOMATOES. The harvest is lost.")
+        else:
+            print("To early to eat vegetable plants!")
 
     def kill(self):
         self.number_of_pests = 0
         print(f'I killed all of pests! Number of pests: {self.number_of_pests}')
-
-    def count_of_pests(self):
-        return self.number_of_pests
 
 
 tomato_bush = TomatoBush(5)
