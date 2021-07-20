@@ -1,3 +1,4 @@
+from __future__ import annotations
 from abc import abstractmethod
 from random import randrange
 
@@ -152,7 +153,7 @@ class Gardener:
     def __init__(self, name, plants):
         self.name = name
         self.plants = plants
-        self.pest = Pests
+
 
     def work(self):
         for plant in self.plants:
@@ -165,27 +166,15 @@ class Gardener:
             else:
                 print('Too early to harvest')
 
-    def check_states(self, pest):
-        self.pest = pest
+    def check_states(self, pest: Pests):
         if pest.number_of_pests > 0:
             print(f"There are {pest.number_of_pests} pests! You need to handling!")
         else:
             print(f"Everything is fine with the garden! There are {pest.number_of_pests} pests!")
 
-    def handling(self, pest):
-        self.pest = pest
-        pest.kill()
-
-    # @staticmethod
-    # def check_states(pest):
-    #     if pest.number_of_pests > 0:
-    #         print(f"There are {pest.number_of_pests} pests! You need to handling!")
-    #     else:
-    #         print(f"Everything is fine with the garden! There are {pest.number_of_pests} pests!")
-
-    # @staticmethod
-    # def handling(pest):
-    #     pest.kill()
+    def handling(self, pest: Pests):
+        pest.number_of_pests = 0
+        print(f'I killed all of pests! Number of pests: {pest.number_of_pests}')
 
 
 class Pests:
@@ -193,7 +182,6 @@ class Pests:
     def __init__(self, type_of_pests, number_of_pests):
         self.type_of_pests = type_of_pests
         self.number_of_pests = number_of_pests
-        self.pests = [index for index in range(number_of_pests - 1)]
 
     def show_the_pests(self):
         return f"I'm a {self.type_of_pests} pest! We are {self.number_of_pests} pieces!"
@@ -201,7 +189,7 @@ class Pests:
     def eat_fruit(self, tree: AppleTree):
         if tree.all_are_ripe() or tree.all_are_not_ripe():
             for _ in range(self.number_of_pests):
-                if not []:
+                if len(tree.apples) >= 1:
                     tree.apples.pop()
             apples_left = len(tree.apples)
             if self.number_of_pests == 0:
@@ -210,8 +198,6 @@ class Pests:
                 print(f"There are left {apples_left} APPLES. You must kill all pests!")
             else:
                 print(f"There are left 0 APPLES. The harvest is lost.")
-        else:
-            print("To early to eat fruit plants!")
 
     def eat_vegetables(self, bush: TomatoBush):
         if bush.all_are_ripe() or bush.all_are_not_ripe():
@@ -225,12 +211,6 @@ class Pests:
                 print(f"There are left {tomatoes_left} TOMATOES!. You must kill all pests!")
             else:
                 print(f"There are left 0 TOMATOES. The harvest is lost.")
-        else:
-            print("To early to eat vegetable plants!")
-
-    def kill(self):
-        self.number_of_pests = 0
-        print(f'I killed all of pests! Number of pests: {self.number_of_pests}')
 
 
 tomato_bush = TomatoBush(5)
