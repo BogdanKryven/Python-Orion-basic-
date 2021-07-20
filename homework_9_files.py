@@ -62,21 +62,21 @@ class ExcelOpener(object):
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         if exc_type is None:
-            self.excel_file.save(part)
+            self.excel_file.save("homeworks/context_manager/excel.xlsx")
             self.excel_file.close()
         else:
             print("\nYOU HAVE A WRONG CODE IN EXCEL_OPENER. REWRITE PLEASE\n")
-            self.excel_file.close = self.reserve_excel_file
-            return False
+            self.excel_file.close()
+            return True
 
 
 with ExcelOpener("homeworks/context_manager/excel.xlsx") as excel_file:
     first_sheet = excel_file.active
     text = first_sheet.cell(row=1, column=1)
     print(first_sheet["A1"].value)
-    text.value = 'random_text11'
-    excel_file.save("homeworks/context_manager/excel.xlsx")
-    raise Exception
+    text.value = 'random_text11111'
+    # excel_file.save("homeworks/context_manager/excel.xlsx")
+    # raise Exception
 
 
 
