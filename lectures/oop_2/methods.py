@@ -18,11 +18,12 @@ class MyClass:
     def foo():
         return print(f'static method called')
 
+
 my_class = MyClass('test')
 MyClass.test()
 
-class MyClass_2:
 
+class MyClass_2:
     TOTAL_OBJECTS = 0
 
     def __init__(self):
@@ -31,6 +32,7 @@ class MyClass_2:
     @classmethod
     def total_objects(cls):
         print(f'Total objects: {cls.TOTAL_OBJECTS}')
+
 
 obj_1 = MyClass_2()
 obj_2 = MyClass_2()
@@ -43,6 +45,7 @@ my_class.method()
 
 MyClass.test()
 MyClass.foo()
+
 
 class Pizza:
     def __init__(self, ingredients):
@@ -59,6 +62,7 @@ class Pizza:
     @classmethod
     def proshuto(cls):
         return cls(['cheese', 'mushrooms'])
+
 
 # print(Pizza.proshuto())
 print(Pizza.margarita('souce'))

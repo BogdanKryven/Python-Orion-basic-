@@ -1,10 +1,18 @@
 from random import random
+
 PROJECT = 'CURSOR'
+
 
 def simple_generator(value):
     while value > 0:
         value -= 1
         yield value
+        # return value
+
+
+gen = simple_generator(5)
+print(next(gen))
+print(next(gen))
 
 
 def increase(value):
@@ -46,11 +54,19 @@ for greeting in GREETINGS:
     print(greeting)
 
 
+#     цей метод ПОВІЛЬНИЙ
+
+
 def generator_example():
     for greeting in GREETINGS:
         yield greeting
 
+
+# а це на порядок ШВИДШИЙ
+
 # generator_example = (greeting for greeting in GREETINGS)
+# по суті то то саме що в 58 рядку, але це більш читабельно і краще це юзати. то генератор експрешн
+
 
 def custom_generator():
     yield GREETINGS[0]
@@ -65,6 +81,7 @@ def check_generator_value(gen):
             print(f'Next value from generator: {next(gen)}')
     except StopIteration:
         print('That was the last one in generator')
+
 
 greetings_gen = generator_example()
 # check_generator_value(greetings_gen)

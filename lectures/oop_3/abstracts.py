@@ -14,6 +14,7 @@ class Person:
     def surname(self):
         pass
 
+
 class Animal(ABC):
     @abstractmethod
     def feed(self, feed_type, lion_type):
@@ -39,8 +40,10 @@ class Panda(Animal):
     def eat(self):
         print('Panda eats')
 
+
 class Snake(Animal):
     pass
+
 
 lion = Lion()
 panda = Panda()
@@ -49,8 +52,6 @@ animals = (lion, panda)
 
 for animal in animals:
     animal.eat()
-
-
 
 # animal = Animal()
 # try:

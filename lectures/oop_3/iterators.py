@@ -10,12 +10,13 @@ print(next(iter_lst))
 
 
 # lst = ['Anna', 'Vasyl', 'Andriy']
-# dct = {1: 'one', 2: 'two', 3: 'three'}
-# iter_dct = iter(dct)
-# print(iter_dct)
-# iter_lst = iter(lst)
-# for i in iter_dct:
-#     print(i)
+dct = {1: 'one', 2: 'two', 3: 'three'}
+iter_dct = iter(dct)
+# print(dct)
+print(iter_dct)
+iter_lst = iter(lst)
+for i in iter_dct:
+    print(i)
 
 # print(next(iter_dct))
 # print(next(iter_dct))

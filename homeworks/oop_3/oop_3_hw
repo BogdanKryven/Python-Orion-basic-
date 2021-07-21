@@ -80,12 +80,14 @@ if __name__ == "__main__":
 
 Tips:
 When a predator hunts, an animal is accidentally taken from the forest.
-This animal may be the predator itself. To check this and distinguish two animals with the same characteristics,
+This animal may be the predator itself. To check this and distinguish two
+animals with the same characteristics,
 use the uuid library. But when creating an animal, assign its id a unique value.
 
 You can use the random library to work with random numbers
 
-If you do not know how to create a forest and look at the survival process, here is an example of code that can be used for debugging
+If you do not know how to create a forest and look at the survival process,
+here is an example of code that can be used for debugging
 if __name__ == "__main__":
    nature = animal_generator()
 
@@ -100,3 +102,135 @@ if __name__ == "__main__":
        for animal in forest:
            animal.eat(forest=forest)
        time.sleep(1)
+
+# herbivorous: Herbivorous, predator: Predator
+def animal_generator():
+    animals = [choice([Herbivorous, Predator]) for _ in range(10)]
+    return animals
+
+
+# print(next(animal_generator(4, 7)))
+print(next(animal_generator()))
+print(next(animal_generator()))
+
+animals = (choice([Herbivorous, Predator])(3, 4) for _ in range(10))
+print(next(animals))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      Выживание
+
+1. В Лесу (Итерируемый) живут Хищники и Травоядные (абстрактный класс
+животных и два потомка).
+Каждое животное рождается со следующими параметрами (с использованием случайных чисел):
+- сила (от 25 до 100 баллов)
+- скорость (от 25 до 100 баллов)
+Сила не может быть больше, чем она была при рождении (инициализация).
+
+На каждом шаге игры берем 1 животное из леса (итерация):
+- Если травоядный, то ест (восстанавливает силы на 50%).
+- Если это хищник, он охотится - случайным образом выбирает животное из леса и:
+    - вылез, ему не повезло и он остался без обеда;
+    - вытащил другое животное, затем пытается его догнать;
+    - если он может догнать, он догоняет и атакует;
+    - если атакован и сильнее, то кушает и восстанавливает 50% сил;
+    - не догнал или не хватило сил, то он и удачливая жертва теряют 30% силы
+    (Потому что оба либо бежали, либо дрались, либо все вместе)
+
+Животное, чья сила истекла, умирает. (Проверить силы можно во время поиска еды)
+
+Игра продолжается до тех пор, пока в лесу присутствуют хищники.
+
+
+Советы:
+Когда хищник охотится, животное случайно вылавливают из леса.
+Это животное может быть самим хищником. Чтобы проверить это и различить двух
+животных с одинаковыми характеристиками,
+используйте библиотеку uuid. Но при создании животного присвойте его id
+уникальное значение.
+
+Вы можете использовать случайную библиотеку для работы со случайными числами
+
+Если вы не знаете, как создать лес и посмотреть на процесс выживания, вот
+пример кода, который можно использовать для
+отладки.
+
+if __name__ == "__main__":
+   nature = animal_generator()
+
+   forest = Forest()
+   for i in range(10):
+       animal = next(nature)
+       forest.add_animal(animal)
+
+   while True:
+       if not forest.any_predator_left():
+           break
+       for animal in forest:
+           animal.eat(forest=forest)
+       time.sleep(1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
