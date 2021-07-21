@@ -20,11 +20,9 @@ print(new_dict.values(), "\n")
 # print(text_lines)
 
 with open(r"homeworks/context_manager/task1.txt", "w") as file:
-    # print(file.read())
     for index, line in enumerate(text_lines):
         if index % 2 != 0:
-            # if line.strip("\n"):
-            file.write(line)
+            file.write(line.strip("\n"))
 
 with open(r"homeworks/context_manager/task1.txt") as file:
     text_lines = file.readlines()
