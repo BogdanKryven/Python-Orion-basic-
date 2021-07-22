@@ -77,10 +77,6 @@ while True:
                     print(num.division_of_numbers())
                     logging.info("operation [/]")
 
-                elif num.operation == "pow":
-                    print(num.pow())
-                    logging.info("operation [pow]")
-
                 elif num.operation == "sqrt":
                     print(num.sqrt())
                     logging.info("operation [sqrt]")
