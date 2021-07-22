@@ -42,6 +42,9 @@ class Calc:
         return f"The percentage of number {self.first} to number {self.second} = {percent}%"
 
 
+log_template = "%(levelname)s: %(filename)s: %(asctime)s - %(message)s"
+logging.basicConfig(level=logging.INFO, filename="Calc.log", filemode="a", format=log_template)
+
 while True:
 
     num = Calc(input("\nInput your first number: "), input("Your operation: "), input("Input your second "
@@ -52,32 +55,53 @@ while True:
         try:
             num.first = float(num.first)
             num.second = float(num.second)
+
             if num.operation == "+":
                 print(num.sum_of_numbers())
+                logging.info("operation [+]")
 
             elif num.operation == "-":
                 print(num.difference_of_numbers())
+                logging.info("operation [-]")
 
             elif num.operation == "*":
                 print(num.multiplication_of_numbers())
-
-            elif num.operation == "/":
-                try:
-                    print(num.division_of_numbers())
-                except ZeroDivisionError:
-                    print("You cannot divide by zero")
+                logging.info("operation [*]")
 
             elif num.operation == "pow":
                 print(num.pow())
+                logging.info("operation [pow]")
 
-            elif num.operation == "sqrt":
-                try:
+            try:
+                if num.operation == "/":
+                    print(num.division_of_numbers())
+                    logging.info("operation [/]")
+
+                elif num.operation == "pow":
+                    print(num.pow())
+                    logging.info("operation [pow]")
+
+                elif num.operation == "sqrt":
                     print(num.sqrt())
-                except TypeError:
-                    print("Cannot calculate the root of a negative number")
+                    logging.info("operation [sqrt]")
 
-            elif num.operation == "%":
-                print(num.percentage_of_number())
+                elif num.operation == "%":
+                    print(num.percentage_of_number())
+                    logging.info("operation [%]")
+
+            except ZeroDivisionError:
+                if num.operation == "/":
+                    print("You cannot divide by zero")
+                    logging.warning("trying to divide by 0")
+
+                elif num.operation == "sqrt":
+                    print("Cannot calculate the root of a negative number")
+                    logging.warning("Trying to make a root of 0 degree")
+
+                elif num.operation == "%":
+                    print("It is impossible to know the percentage of any number from the number 0")
+                    logging.warning("Trying to find out the percentage of a number from 0")
 
         except ValueError:
             print("You didn't enter numbers. Try again")
+            logging.error("Entered not numbers")
