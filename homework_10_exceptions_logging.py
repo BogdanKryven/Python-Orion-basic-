@@ -1,6 +1,6 @@
 import logging
 import time
-from random import choice, randrange
+from random import randrange
 
 
 # TASK 1
@@ -155,15 +155,15 @@ class RobotVacuumCleaner:
         self.battery_charge -= self.ENERGY_REDUCE
         print("MOVE")
 
-        if self.battery_charge <= 0:
+        if self.water <= 0 and self.trash_can >= 100:
+            raise StopAll
+
+        elif self.battery_charge <= 0:
             self.battery_charge = 0
             raise DischargedButtery
 
         elif self.battery_charge <= 20:
             raise LowBattery
-
-        elif self.water <= 0 and self.trash_can >= 100 and self.battery_charge > 0:
-            raise StopAll
 
         if self.water > 0:
             self.wash()
@@ -201,7 +201,7 @@ class RobotVacuumCleaner:
             raise FullTrashCan
 
 
-cleaning = RobotVacuumCleaner(50, 91, 23)
+cleaning = RobotVacuumCleaner(randrange(0, 100), randrange(0, 100), randrange(0, 100))
 # print(cleaning.battery_charge, cleaning.trash_can, cleaning.water)
 
 while True:
@@ -211,32 +211,59 @@ while True:
     except LowBattery:
         print("My power is less then 20%. Put me on charge")
         if cleaning.water > 0:
-            cleaning.wash()
+            try:
+                cleaning.wash()
+            except LowWater:
+                print("My water reserve is less then 20%. Replenish water supplies")
+            except EmptyWater:
+                print("I stopped wash. NO WATER!. Replenish water supplies!!!")
         if cleaning.trash_can < 100:
-            cleaning.vacuum_cleaner()
-            print("\n")
+            try:
+                cleaning.vacuum_cleaner()
+            except ThreeQuartersTrashCan:
+                print("My trash can is 75% full\n")
+            except AlmostFullTrashCan:
+                print("Please empty the trash can. My trash can is 90% full\n")
+            except FullTrashCan:
+                print(f"The VACUUM CLEANER IS FULL !!. I stopped vacuum cleaning!\n")
+        print("\n")
         time.sleep(1)
     except DischargedButtery:
         print("I stopped move. No power. Put me on charge\n")
         break
+    # except (FullTrashCan and EmptyWater):
+    #     print("I stopped cleaning. The TRASH CAN IS FULL and there is NO WATER")
+    #     break
     except StopAll:
         print("I stopped cleaning. The TRASH CAN IS FULL and there is NO WATER")
         break
 
-
     except LowWater:
         print("My water reserve is less then 20%. Replenish water supplies")
         if cleaning.trash_can < 100:
-            cleaning.vacuum_cleaner()
+            try:
+                cleaning.vacuum_cleaner()
+            except ThreeQuartersTrashCan:
+                print("My trash can is 75% full\n")
+            except AlmostFullTrashCan:
+                print("Please empty the trash can. My trash can is 90% full\n")
+            except FullTrashCan:
+                print(f"The VACUUM CLEANER IS FULL !!. I stopped vacuum cleaning!\n")
         time.sleep(1)
         print("\n")
     except EmptyWater:
         print("I stopped wash. NO WATER!. Replenish water supplies!!!")
         if cleaning.trash_can < 100:
-            cleaning.vacuum_cleaner()
+            try:
+                cleaning.vacuum_cleaner()
+            except ThreeQuartersTrashCan:
+                print("My trash can is 75% full\n")
+            except AlmostFullTrashCan:
+                print("Please empty the trash can. My trash can is 90% full\n")
+            except FullTrashCan:
+                print(f"The VACUUM CLEANER IS FULL !!. I stopped vacuum cleaning!\n")
         time.sleep(1)
         print("\n")
-
 
     except ThreeQuartersTrashCan:
         print("My trash can is 75% full\n")
