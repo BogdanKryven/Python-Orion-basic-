@@ -52,8 +52,8 @@ logging.basicConfig(level=logging.INFO, filename="Calc.log", filemode="a", forma
 
 while True:
 
-    num = Calc(input("\nInput your first number: "), input("Your operation: "), input("Input your second "
-                                                                                      "number: "))
+    num = Calc(input("\nInput your first number: "), input("Your operation (+, -, *, /, %, pow, sqrt): "),
+               input("Input your second number: "))
 
     for _ in range(1):
 
@@ -96,12 +96,17 @@ while True:
                     logging.warning("trying to divide by 0")
 
                 elif num.operation == "sqrt":
-                    print("Cannot calculate the root of a negative number")
+                    print("Cannot calculate the root of 0 degree")
                     logging.warning("Trying to make a root of 0 degree")
 
                 elif num.operation == "%":
                     print("It is impossible to know the percentage of any number from the number 0")
                     logging.warning("Trying to find out the percentage of a number from 0")
+
+            except TypeError:
+                if num.operation == "sqrt":
+                    print("Cannot calculate the root of a negative number")
+                    logging.warning("Trying to calculate the root of a negative number")
 
         except ValueError:
             print("You didn't enter numbers. Try again")
@@ -109,7 +114,6 @@ while True:
 
 
 # TASK 2
-
 
 class LowWater(Exception):
     pass
@@ -165,14 +169,6 @@ class RobotVacuumCleaner:
         elif self.battery_charge <= 20:
             raise LowBattery
 
-        if self.water > 0:
-            self.wash()
-        if self.trash_can < 100:
-            self.vacuum_cleaner()
-
-        time.sleep(1)
-        print("\n")
-
     def wash(self):
         if self.water > 0:
             self.water -= self.WATER_REDUCE
@@ -201,7 +197,7 @@ class RobotVacuumCleaner:
             raise FullTrashCan
 
 
-cleaning = RobotVacuumCleaner(randrange(0, 100), randrange(0, 100), randrange(0, 100))
+cleaning = RobotVacuumCleaner(randrange(99, 100), randrange(0, 100), randrange(0, 100))
 # print(cleaning.battery_charge, cleaning.trash_can, cleaning.water)
 
 while True:
@@ -210,66 +206,30 @@ while True:
         cleaning.move()
     except LowBattery:
         print("My power is less then 20%. Put me on charge")
-        if cleaning.water > 0:
-            try:
-                cleaning.wash()
-            except LowWater:
-                print("My water reserve is less then 20%. Replenish water supplies")
-            except EmptyWater:
-                print("I stopped wash. NO WATER!. Replenish water supplies!!!")
-        if cleaning.trash_can < 100:
-            try:
-                cleaning.vacuum_cleaner()
-            except ThreeQuartersTrashCan:
-                print("My trash can is 75% full\n")
-            except AlmostFullTrashCan:
-                print("Please empty the trash can. My trash can is 90% full\n")
-            except FullTrashCan:
-                print(f"The VACUUM CLEANER IS FULL !!. I stopped vacuum cleaning!\n")
-        print("\n")
-        time.sleep(1)
     except DischargedButtery:
         print("I stopped move. No power. Put me on charge\n")
         break
-    # except (FullTrashCan and EmptyWater):
-    #     print("I stopped cleaning. The TRASH CAN IS FULL and there is NO WATER")
-    #     break
     except StopAll:
         print("I stopped cleaning. The TRASH CAN IS FULL and there is NO WATER")
         break
 
-    except LowWater:
-        print("My water reserve is less then 20%. Replenish water supplies")
-        if cleaning.trash_can < 100:
-            try:
-                cleaning.vacuum_cleaner()
-            except ThreeQuartersTrashCan:
-                print("My trash can is 75% full\n")
-            except AlmostFullTrashCan:
-                print("Please empty the trash can. My trash can is 90% full\n")
-            except FullTrashCan:
-                print(f"The VACUUM CLEANER IS FULL !!. I stopped vacuum cleaning!\n")
-        time.sleep(1)
-        print("\n")
-    except EmptyWater:
-        print("I stopped wash. NO WATER!. Replenish water supplies!!!")
-        if cleaning.trash_can < 100:
-            try:
-                cleaning.vacuum_cleaner()
-            except ThreeQuartersTrashCan:
-                print("My trash can is 75% full\n")
-            except AlmostFullTrashCan:
-                print("Please empty the trash can. My trash can is 90% full\n")
-            except FullTrashCan:
-                print(f"The VACUUM CLEANER IS FULL !!. I stopped vacuum cleaning!\n")
-        time.sleep(1)
-        print("\n")
+    if cleaning.water > 0:
+        try:
+            cleaning.wash()
+        except LowWater:
+            print("My water reserve is less then 20%. Replenish water supplies")
+        except EmptyWater:
+            print("I stopped wash. NO WATER!. Replenish water supplies!!!")
 
-    except ThreeQuartersTrashCan:
-        print("My trash can is 75% full\n")
-        time.sleep(1)
-    except AlmostFullTrashCan:
-        print("Please empty the trash can. My trash can is 90% full\n")
-        time.sleep(1)
-    except FullTrashCan:
-        print(f"The VACUUM CLEANER IS FULL !!. I stopped vacuum cleaning!\n")
+    if cleaning.trash_can < 100:
+        try:
+            cleaning.vacuum_cleaner()
+        except ThreeQuartersTrashCan:
+            print("My trash can is 75% full\n")
+        except AlmostFullTrashCan:
+            print("Please empty the trash can. My trash can is 90% full\n")
+        except FullTrashCan:
+            print(f"The VACUUM CLEANER IS FULL !!. I stopped vacuum cleaning!\n")
+
+    time.sleep(1)
+    print("\n")
