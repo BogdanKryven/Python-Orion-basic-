@@ -1,10 +1,10 @@
 from unittest import TestCase
-from user import User
+from lectures.testing.user import User
 
 
 class TestUser(TestCase):
     def setUp(self) -> None:
-        print("setUp")
+        print("\nsetUp")
         self.user_1 = User("Vasya", "Ivanov", 23)
 
     def tearDown(self) -> None:

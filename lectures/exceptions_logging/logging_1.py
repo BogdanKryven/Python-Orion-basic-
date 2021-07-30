@@ -2,7 +2,7 @@ import logging
 
 template = "%(levelname)s: %(filename)s: %(asctime)s - %(message)s"
 
-logging.basicConfig(level=logging.DEBUG, filename="log.log", filemode="a", format=template)
+logging.basicConfig(level=logging.DEBUG, filename="sd.log", filemode="a", format=template)
 
 logging.debug("debug msg")
 logging.info("info msg")

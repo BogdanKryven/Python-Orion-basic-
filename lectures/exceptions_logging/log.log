@@ -1,0 +1,20 @@
+DEBUG: logging_1.py: 2021-07-22 17:08:54,239 - debug msg
+INFO: logging_1.py: 2021-07-22 17:08:54,239 - info msg
+WARNING: logging_1.py: 2021-07-22 17:08:54,239 - warning msg
+ERROR: logging_1.py: 2021-07-22 17:08:54,239 - error msg
+CRITICAL: logging_1.py: 2021-07-22 17:08:54,239 - critical msg
+__main__ - DEBUG - debug msg
+__main__ - INFO - info msg
+__main__ - WARNING - warning msg
+__main__ - ERROR - error msg
+__main__ - CRITICAL - critical msg
+__main__ - DEBUG - debug msg
+__main__ - INFO - info msg
+__main__ - WARNING - warning msg
+__main__ - ERROR - error msg
+__main__ - CRITICAL - critical msg
+DEBUG: logging_1.py: 2021-07-22 18:11:29,067 - debug msg
+INFO: logging_1.py: 2021-07-22 18:11:29,067 - info msg
+WARNING: logging_1.py: 2021-07-22 18:11:29,067 - warning msg
+ERROR: logging_1.py: 2021-07-22 18:11:29,067 - error msg
+CRITICAL: logging_1.py: 2021-07-22 18:11:29,067 - critical msg

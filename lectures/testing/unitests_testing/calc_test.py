@@ -1,6 +1,9 @@
 from unittest import TestCase
+from lectures.testing.calc import Calc
 
-from calc import Calc
+import lectures
+from lectures import testing
+
 
 
 class TestSum(TestCase):

@@ -1,29 +1,48 @@
+#
+# a = "3"
+# b = 1
+# try:
+#     try:
+#         c = a / b
+#     except ZeroDivisionError:
+#         c = 0
+#     except (TypeError, ValueError) as ex:
+#         print("a or b is not number")
+#         raise ex
+#     except Exception:
+#         print("Exception")
+#     else:
+#         print("else")
+#     finally:
+#         print("finally")
+# except TypeError:
+#     print("Type error except")
+#
+# if b == 0:
+#
+#     c = 0
+#
+# # print("c:", c)
+# print("end")
 
-a = "3"
-b = 1
-try:
-    try:
-        c = a / b
-    except ZeroDivisionError:
-        c = 0
-    except (TypeError, ValueError) as ex:
-        print("a or b is not number")
-        raise ex
-    except Exception:
-        print("Exception")
-    else:
-        print("else")
-    finally:
-        print("finally")
-except TypeError:
-    print("Type error except")
 
-if b == 0:
+class MyException(Exception):
+    def __init__(self, msg):
+        self.msg = msg
 
-    c = 0
+    def __str__(self):
+        return f"{self.msg}"
 
-# print("c:", c)
-print("end")
+    def save(self):
+        pass
+
+
+class ChildException(MyException):
+    pass
+
+
+el = MyException("arrr")
+print(str(el))
 #
 # try:
 #     # raise Exception(1, 2, 3,"123",4 ,5 ,)
@@ -33,7 +52,7 @@ print("end")
 #
 
 
-class MyException(Exception):
+class MyException1(Exception):
     pass
 
 
