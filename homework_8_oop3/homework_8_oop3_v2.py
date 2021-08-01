@@ -2,14 +2,14 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from random import randrange, choice
 from typing import Any, Dict
-import uuid
-import time
+from uuid import uuid4
+from time import sleep
 
 
 class Animal(ABC):
 
     def __init__(self, speed: int, power: int):
-        self.id = uuid.uuid4()
+        self.id = uuid4()
         self.max_power = power
         self.current_power = power
         self.speed = speed
@@ -150,6 +150,6 @@ if __name__ == "__main__":
         for _ in list(forest_.animals.values()):
             animal = choice(list(forest_.animals.values()))
             animal.eat(forest=forest_)
-            time.sleep(1)
+            sleep(1)
 
     forest_.see_forest()
