@@ -9,7 +9,7 @@ def decorator_time(function):
 
         print(time_point_2_after - time_point_1_before)
         return result
-    return wrap()
+    return wrap
 
 
 @decorator_time
@@ -20,3 +20,6 @@ def save_data():
         data = input("\nInput: ").split(" ")
         [data_list.append(i) for i in data]
     print(data_list)
+
+
+save_data()
