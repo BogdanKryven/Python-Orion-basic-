@@ -12,7 +12,9 @@ def filter_(*args):
             result = func(new_list)
 
             return result
+
         return wrap
+
     return decor
 
 
@@ -22,7 +24,9 @@ def decor_time_check(func):
         result = func(*args, **kwargs)
         print(time.time() - t1)
         return result
+
     return wrap
+
 
 def method_executor(func):
     def wrap(*args, **kwargs):
@@ -32,6 +36,7 @@ def method_executor(func):
             pass
 
     return wrap
+
 
 #
 # decor = filter_(int, float)
@@ -60,6 +65,3 @@ def minus(list_):
 
 print(sum_([1, 2, 3, 4, 1.2, "sd"]))
 # print(minus([1, 2, 3, 4, 1.2, "sd"]))
-
-
-
