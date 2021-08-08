@@ -1,14 +1,27 @@
-
-def decor(func):
-    def wrap(*args, **kwargs):
-        result = func(*args, **kwargs)
-        return result
-    return wrap
+class WrongType(Exception):
+    pass
 
 
-@decor(int, float, int, float)
-def func_(a, b, c, d):
-    return a, b, c, d
+def decorator(arg_1, arg_2, arg_3, arg_4):
+    def decor(func):
+        def wrap(a, b, c):
+            try:
+                if isinstance(a, arg_1) and isinstance(b, arg_2) and isinstance(c, arg_3) \
+                        and isinstance(func(a, b, c), arg_4):
+                    return func(a, b, c)
+                else:
+                    raise WrongType
+
+            except WrongType:
+                return "Wrong type. Rewrite please"
+        return wrap
+
+    return decor
 
 
-print(func_(1, 1.2, 4))
+@decorator(int, float, int, float)
+def func_(a, b, c):
+    return sum([a, b, c])
+
+
+print(func_('ss', 1.2, 4))
