@@ -1,34 +1,38 @@
 import json
+from json_exceptions import NamesEmailError, NamesError, EmailError
 
 
-class NamesError(Exception):
-    pass
+def data_name():
+    names = []
+    for name in json.load(open("data.json"))["info"]:
+        names.append(name["name"])
+    return names
 
 
-class EmailError(Exception):
-    pass
+def data_email():
+    emails = []
+    for email in json.load(open("data.json"))["info"]:
+        emails.append(email["email"])
+    return emails
 
 
 def add_info():
     try:
         data = json.load(open("data.json"))
-    except:
+        names = data_name()
+        emails = data_email()
+    except json.decoder.JSONDecodeError:
         data = {"info": []}
+        names = []
+        emails = []
 
     users = {
         "name": f"{input('Input your name: ')}",
         "email": f"{input('Input your email: ')}"
     }
-
-    names = []
-    for name in data["info"]:
-        names.append(name["name"])
-
-    emails = []
-    for email in data["info"]:
-        emails.append(email["email"])
-
-    if users.get("name") in names:
+    if users.get("name") in names and users.get("email") in emails:
+        raise NamesEmailError
+    elif users.get("name") in names:
         raise NamesError
     elif users.get("email") in emails:
         raise EmailError
@@ -46,3 +50,5 @@ for _ in range(int(input(f"How many users you want to add? "))):
         print("This name is already in dictionary!\n")
     except EmailError:
         print("This email is already in dictionary!\n")
+    except NamesEmailError:
+        print("Name and email are already in dictionary!\n")
