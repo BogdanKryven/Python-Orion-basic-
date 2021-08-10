@@ -1,6 +1,6 @@
 from unittest import TestCase
-from homework_11_testing import Calc
-from homework_11_testing import SqrtException
+from homework_11_testing_v1.homework_11_testing import Calc
+from homework_11_testing_v1.homework_11_testing import SqrtException
 
 
 class TestSum(TestCase):
@@ -163,7 +163,8 @@ class TestPow(TestCase):
         print("TestPow_001 is OK")
         self.assertEqual(Calc.pow(4, 2), 16)
         self.assertEqual(Calc.pow(8, 2), 64)
-        self.assertEqual(Calc.pow(-2, 2), -4)
+        self.assertEqual(Calc.pow(-2, 2), 4)
+        self.assertEqual(Calc.pow(0, 3), 0)
 
     def test_002(self):
         print("TestPow_002 is OK")
@@ -173,11 +174,6 @@ class TestPow(TestCase):
             Calc.pow("1", 2)
             Calc.pow([23], {3})
             Calc.pow(23, "2+j")
-
-    def test_003(self):
-        print("TestPow_003 is OK")
-        with self.assertRaises(ZeroDivisionError):
-            Calc.pow(0, 3)
 
 
 class TestSqrt(TestCase):
@@ -195,7 +191,6 @@ class TestSqrt(TestCase):
         print("TestSqrt_001 is OK")
         self.assertEqual(Calc.sqrt(4, 2), 2)
         self.assertEqual(Calc.sqrt(9, 2), 3)
-        self.assertEqual(Calc.sqrt(-9, 2), -3)
 
     def test_002(self):
         print("TestSqrt_002 is OK")
@@ -214,7 +209,7 @@ class TestSqrt(TestCase):
     def test_004(self):
         print("TestSqrt_004 is OK")
         with self.assertRaises(SqrtException):
-            Calc.sqrt(-2, 1)
+            Calc.sqrt(-2, -1)
 
 
 class TestPercentage(TestCase):
@@ -246,8 +241,3 @@ class TestPercentage(TestCase):
         print("TestPercentage_003 is OK")
         with self.assertRaises(ZeroDivisionError):
             Calc.percentage_of_number(1, 0)
-
-
-
-
-

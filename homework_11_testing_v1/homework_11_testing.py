@@ -86,8 +86,8 @@ class Calc:
     def pow(a, b):
         """ Піднімає печше число до степеня другого числа
 
-        >>> Calc.pow(3, 2)
-        9
+        >>> Calc.pow(0, 1)
+        0
 
         :param a: Перше число (яке підносимо до степеня)
         :param b: Друге число (степінь до якого ми підносимо це число)
@@ -107,7 +107,7 @@ class Calc:
         :return: Результат
         """
 
-        if a < 0:
+        if b < 0 or a < 0:
             raise SqrtException
         return a ** (1 / b)
 
