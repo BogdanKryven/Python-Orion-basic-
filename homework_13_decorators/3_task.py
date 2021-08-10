@@ -9,7 +9,7 @@ def decorator_of_list(*args):
                 else:
                     try:
                         new_list.append(float(i))
-                    except ValueError:
+                    except (ValueError, TypeError):
                         continue
 
             return function(new_list)
@@ -26,12 +26,5 @@ def list_of_elements(lst):
     return round(sum(lst), 2)
 
 
-list_of_el = [3, 5, "1.1", "1", 1, 9, "a", "f", 1, 3]
+list_of_el = [3, 5, "1.1", "1", 1, 9, "a", "f", 1, 3, [1, 3], (2, 6, 7), {"a": "abc"}, 1]
 list_of_elements(list_of_el)
-
-# @decorator_of_list
-# def list_of_elements():
-#     numbers_list = []
-#     count_of_numbers = int(input("Input count of numbers: "))
-#     [numbers_list.append(i) for i in range(count_of_numbers)]
-#     return sum(numbers_list)
