@@ -57,3 +57,7 @@ for _ in range(int(input(f"How many users you want to add? "))):
         print("This email is already in dictionary!\n")
     except NamesEmailError:
         print("Name and email are already in dictionary!\n")
+
+with open("data.json", "r") as json_file:
+    data_ = json.load(json_file)
+print(json.dumps(data_, indent=4, ensure_ascii=False))
