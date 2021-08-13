@@ -8,18 +8,18 @@ def decorator_time(func):
     def wrapper(*args, **kwargs):
         bef = time.monotonic()
         func(*args, **kwargs)
-        time.sleep(1)
-        logging.info(f"Time required: {time.monotonic() - bef}")
+        logging.info(f"Time required {args[0]} thread: {time.monotonic() - bef}")
 
     return wrapper
 
 
 @decorator_time
 def quadratic_equation(name_thread_, a, b, c):
-    logging.info(f"Thread {name_thread_} starting!")
+    time.sleep(1)
+    logging.info(f"Thread-{name_thread_} starting!")
     d = pow(b, 2) - 4 * a * c
     if d > 0:
-        results = (-b - sqrt(d)) / 2 * a, (-b + sqrt(d)) / 2 * a
+        results = (-b - sqrt(d)) / (2 * a), (-b + sqrt(d)) / (2 * a)
         logging.info(f"The roots of quadratic equation "
                      f"{a}x^2 {'+' if b > 0 else '-'} "
                      f"{b if b > 0 else -b}x {'+' if c > 0 else '-'} "
@@ -45,5 +45,6 @@ second = threading.Thread(target=quadratic_equation,
 tasks = [first, second]
 for i in tasks:
     i.start()
+    logging.info(f"Indent {i.name}: {threading.get_ident()}")
+for i in tasks:
     i.join()
-    logging.info(f"Indent THREAD: {threading.get_ident()}\n")
