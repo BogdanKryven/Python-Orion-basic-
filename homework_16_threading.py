@@ -3,6 +3,9 @@ from math import sqrt
 import logging
 import time
 
+format_ = "%(asctime)s : %(message)s"
+logging.basicConfig(format=format_, level=logging.INFO)
+
 
 def decorator_time(func):
     def wrapper(*args, **kwargs):
@@ -35,11 +38,8 @@ def quadratic_equation(name_thread_, a, b, c):
     logging.info(f"Thread {name_thread_} finishing!")
 
 
-format_ = "%(asctime)s : %(message)s"
-logging.basicConfig(format=format_, level=logging.INFO)
-
 first = threading.Thread(target=quadratic_equation,
-                         args=(1, 1, 4, 4))
+                         args=(1, 1, 3, 4))
 second = threading.Thread(target=quadratic_equation,
                           args=(2, 1, 7, 3))
 tasks = [first, second]
