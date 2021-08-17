@@ -47,14 +47,16 @@ def decorator_html(func):
 @DecoratorDivBlock('style_class111')
 def get_names_page(names_list) -> str:
     template_head = "<h3> User names: </h3>\n"
-    string_info = template_head
-    for i, name in enumerate(names_list):
-        if i + 1 == len(names_list):
-            template = f"<p> {name} </p>"
-            string_info += template
-        else:
-            template = f"<p> {name} </p>\n"
-            string_info += template
+    names_ = [f"<p> {name} </p>" for name in names_list]
+    string_info = template_head + "\n".join(names_)
+    # string_info = template_head
+    # for i, name in enumerate(names_list):
+    #     if i + 1 == len(names_list):
+    #         template = f"<p> {name} </p>"
+    #         string_info += template
+    #     else:
+    #         template = f"<p> {name} </p>\n"
+    #         string_info += template
 
     return string_info
 
