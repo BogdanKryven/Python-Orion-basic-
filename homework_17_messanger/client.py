@@ -1,27 +1,40 @@
+from __future__ import annotations
 import re
 import json
 import socket
 import threading
+from time import sleep
 
 
 class NickNameError(Exception):
     pass
 
 
-def json_nicks():
-    nicks = []
-    for nick in json.load(open("data.json"))["info"]:
-        nicks.append(nick)
-    return nicks
+try:
+    with open("data.json", "r") as json_data:
+        data_ = json.load(json_data)
+except json.decoder.JSONDecodeError:
+    data_ = {"info": []}
+
+nicks_ = list()
+for i in data_["info"]:
+    nicks_.append(i["nickname"])
+print(nicks_)
 
 
 def read_sock():
-    # with open("data.json", "r") as json_data:
-    #     data_ = json.load(json_data)
-    #
     # while True:
-    #     if
-    #
+    #     if alias in nicks_:
+    #         print("This nickname is already used. Try again.")
+    #         alias_ = input("Input your new nickname: ")
+    #         if alias_ in nicks_:
+    #             break
+    #         else:
+    #             sock.sendto(("[" + alias + "] Connect to server").encode('utf-8'), server)
+    #             break
+    #     else:
+    #         break
+
     while True:
         data = sock.recv(1024).decode('utf-8')
         print(data)
@@ -36,7 +49,7 @@ def read_sock():
             sock.sendto((message_ + '[' + alias + '] ').encode('utf-8'), server)
 
 
-server = ('192.168.1.5', 6002)
+server = ('0.0.0.0', 6002)
 alias = input("Your username: ")
 all_users = list()
 print(all_users)
@@ -50,6 +63,7 @@ potik.start()
 
 blocked_users_ = list()
 while True:
+    sleep(0.2)
     print('1. Send message to group chat')
     print('2. Send private message')
     print('3. Block user')
