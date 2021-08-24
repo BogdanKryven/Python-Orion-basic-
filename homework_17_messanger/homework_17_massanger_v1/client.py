@@ -3,41 +3,23 @@ import re
 import json
 import socket
 import threading
-from time import sleep
+
+clients_ = list()
 
 
-class NickNameError(Exception):
-    pass
-
-
-try:
-    with open("data.json", "r") as json_data:
-        data_ = json.load(json_data)
-except json.decoder.JSONDecodeError:
-    data_ = {"info": []}
-
-nicks_ = list()
-for i in data_["info"]:
-    nicks_.append(i["nickname"])
-print(nicks_)
+def open_json_data():
+    try:
+        with open("data.json", "r") as json_data:
+            data_ = json.load(json_data)
+            for i in data_["info"]:
+                clients_.append(i["nickname"])
+    except json.decoder.JSONDecodeError:
+        pass
 
 
 def read_sock():
-    # while True:
-    #     if alias in nicks_:
-    #         print("This nickname is already used. Try again.")
-    #         alias_ = input("Input your new nickname: ")
-    #         if alias_ in nicks_:
-    #             break
-    #         else:
-    #             sock.sendto(("[" + alias + "] Connect to server").encode('utf-8'), server)
-    #             break
-    #     else:
-    #         break
-
     while True:
         data = sock.recv(1024).decode('utf-8')
-        print(data)
         try:
             user_nickname = re.search("\[(.*)\]", data).group(0)
         except AttributeError:
@@ -45,17 +27,28 @@ def read_sock():
         if user_nickname not in blocked_users_:
             print(data)
         else:
-            message_ = "@" + recipient + ", " + " you blocked by this user: "
-            sock.sendto((message_ + '[' + alias + '] ').encode('utf-8'), server)
+            message = "@" + recipient + ", " + " you blocked by this user"
+            sock.sendto(('[' + alias + '] ' + message).encode('utf-8'), server)
+
+
+def input_username():
+    alias_ = input("Your username: ")
+    if "[" + alias_ + "]" in clients_:
+        while True:
+            print("This nickname is already used. Try again")
+            alias_ = input("Your new username: ")
+            if "[" + alias_ + "]" not in clients_:
+                break
+            else:
+                continue
+    return alias_
 
 
 server = ('0.0.0.0', 6002)
-alias = input("Your username: ")
-all_users = list()
-print(all_users)
+open_json_data()
+alias = input_username()
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-sock.bind(('', 0))
 sock.sendto(("[" + alias + "] Connect to server").encode('utf-8'), server)
 
 potik = threading.Thread(target=read_sock)
@@ -63,7 +56,6 @@ potik.start()
 
 blocked_users_ = list()
 while True:
-    sleep(0.2)
     print('1. Send message to group chat')
     print('2. Send private message')
     print('3. Block user')
